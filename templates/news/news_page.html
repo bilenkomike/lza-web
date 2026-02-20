@@ -47,9 +47,21 @@
     </figure>
 
   {% elif block.block_type == "advert" %}
-    <div class="news-index__advert block-advert">
-      {{ block.value }}
-    </div>
+    <div class="advert">
+    {% if block.value.url %}
+      <a href="{{ block.value.url }}" target="_blank" rel="noopener noreferrer">
+        {% if block.value.image %}
+          {% image block.value.image fill-1200x180 class="advert__image" alt=block.value.caption|default:"Advertisement" %}
+        {% else %}
+          {{ block.value.caption|default:"Advertisement" }}
+        {% endif %}
+      </a>
+    {% else %}
+      {% if block.value.image %}
+        {% image block.value.image fill-1200x180 class="advert__image" alt=block.value.caption|default:"Advertisement" %}
+      {% endif %}
+    {% endif %}
+  </div>
 
   {% endif %}
 {% endfor %}

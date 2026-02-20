@@ -4,9 +4,19 @@
   "nav_advertisement": { "en": "Advertisement", "lv": "Reklāma", "ru": "Реклама" },
   "nav_contacts": { "en": "Contacts", "lv": "Kontakti", "ru": "Контакты" },
   "nav_provide_info": {
-    "en": "Provide information urgently",
-    "lv": "Steidzami sniegt informāciju",
-    "ru": "Срочно\n сообщить информацию"
+    "en": "Provide",
+    "lv": "Steidzami",
+      "ru": "Срочно"
+  },
+  "nav_provide_info_two": {
+    "en": "information",
+    "lv": "sniegt",
+      "ru": "сообщить"
+  },
+  "nav_provide_info_three": {
+    "en": "urgently",
+    "lv": "informāciju",
+    "ru": "информацию"
   },
   "footer_about_title": { "en": "About us", "lv": "Par mums", "ru": "О нас" },
   "footer_quick_links": { "en": "Quick links", "lv": "Ātras saites", "ru": "Быстрые ссылки" },
@@ -28,5 +38,86 @@
     "en": "Send",
     "lv": "Nosūtīt",
     "ru": "Отправить"
+  },
+  "incident_what_happened": {
+    "en": "What happened?",
+    "lv": "Kas notika?",
+    "ru": "Что произошло?"
+  },
+  "incident_where_happened": {
+    "en": "Where did it happen?",
+    "lv": "Kur tas notika?",
+    "ru": "Где это произошло?"
+  },
+  "incident_name": {
+    "en": "Your name",
+    "lv": "Jūsu vārds",
+    "ru": "Ваше имя"
+  },
+  "incident_phone": {
+    "en": "Your phone number",
+    "lv": "Jūsu tālruņa numurs",
+    "ru": "Ваш номер телефона"
+  },
+  "incident_send_info": {
+    "en": "Send Info",
+     "lv": "Nosūtīt informāciju",
+    "ru": "Отправить информацию"
+  },
+
+  "contact_first_name": {
+    "en": "Name",
+    "lv": "Vārds",
+    "ru": "Имя"
+  },
+  "contact_last_name": {
+    "en": "Surname",
+    "lv": "Uzvārds",
+    "ru": "Фамилия"
+  },
+  "contact_email": {
+    "en": "Email",
+    "lv": "E-pasts",
+    "ru": "Почта"
+  },
+  "contact_organisation": {
+    "en": "Organisation (optional)",
+    "lv": "Organizācija (nav obligāti)",
+    "ru": "Организация (необязательно)"
+  },
+  "contact_message": {
+    "en": "Message",
+    "lv": "Ziņojums",
+    "ru": "Сообщение"
+  },
+  "organisation_name": {
+    "en": "Name of the organisation",
+    "lv": "Organizācijas nosaukums",
+    "ru": "Название организации"
+  },
+  "contact_information": {
+    "en": "Contact information",
+    "lv": "Kontakt informācija",
+    "ru": "Контактная информация"
+  },
+  "address": {
+    "en": "Address",
+    "lv": "Adrese",
+    "ru": "Адрес"
+  },
+   "check_all_news": {
+    "en": "Check all news",
+    "lv": "Skatīt visas ziņas",
+    "ru": "Смотреть все новости"
+  },
+  "next": {
+    "en": "Next",
+    "lv": "Nākamais",
+    "ru": "Следующее"
+  },
+  "previous": {
+    "en": "Previous",
+    "lv": "Iepriekšējais",
+    "ru": "Предыдущее"
   }
 }

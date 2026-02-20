@@ -16,7 +16,7 @@ class ImageBlock(blocks.StructBlock):
     class Meta:
         icon = "image"
 
-# Custom block for sections
+
 class AboutSectionBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True, max_length=255)
     subtext = blocks.CharBlock(required=False, max_length=255)

@@ -4,7 +4,6 @@ from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.snippets.models import register_snippet
 from wagtail.models import Page, TranslatableMixin
 from news.models import NewsPage
-from django.utils.translation import get_language
 
 
 

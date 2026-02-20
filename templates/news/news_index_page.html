@@ -1,13 +1,20 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags i18n %}
+{% load static wagtailcore_tags wagtailimages_tags i18n i18n_simple %}
 
 {% block content %}
 <section class="news-index">
   <h1 class="news-index__title">{{ page.title }}</h1>
 
   {% if page.advert %}
-    <div class="news-index__advert">
+    <div class="advert">
+    <a href="{{ page.advert.url }}" target="_blank" rel="noopener">
+      {% if page.advert.image %}
+      {% image page.advert.image fill-1200x180 %}
+      {% else %}
       {{ page.advert }}
+      {% endif %}
+    </a>
+
     </div>
   {% endif %}
 
@@ -61,25 +68,22 @@
 
   {% if news.paginator.num_pages > 1 %}
     <nav class="pagination">
-
-
-
       {% if news.paginator.num_pages > 1 %}
-  <nav class="pagination">
+      <div class="form-submit home-actions">
     {% if news.has_previous %}
       <a class="pagination__prev"
          href="?page={{ news.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
-        ← {% trans "Previous" %}
+        ← {% t "previous" %}
       </a>
     {% endif %}
 
     {% if news.has_next %}
       <a class="pagination__next"
          href="?page={{ news.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
-        {% trans "Next" %} →
+        {% t "next" %} →
       </a>
     {% endif %}
-  </nav>
+      </div>
 {% endif %}
 
     </nav>

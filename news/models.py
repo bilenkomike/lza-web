@@ -6,7 +6,6 @@ from wagtail.models import Page, TranslatableMixin
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.blocks import SnippetChooserBlock
-from django.shortcuts import render
 from django.core.paginator import Paginator
 from wagtail.search import index
 from wagtail.images import get_image_model_string
@@ -119,12 +118,10 @@ class NewsIndexPage(Page):
         else:
             news_qs = news_qs.order_by("-publication_date")
 
-        paginator = Paginator(news_qs, 2)
+        paginator = Paginator(news_qs, 1)
         page_number = request.GET.get("page")
 
         context["news"] = paginator.get_page(page_number)
         context["search_query"] = search_query
 
         return context
-
-

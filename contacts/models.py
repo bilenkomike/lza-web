@@ -3,9 +3,7 @@ from django.db import models
 from wagtail.models import Page, TranslatableMixin
 from wagtail.admin.panels import FieldPanel
 from django.shortcuts import render
-from django.core.mail import send_mail
 from django import forms
-# from .forms import ContactForm, IncidentReportForm
 from .utils import t
 
 

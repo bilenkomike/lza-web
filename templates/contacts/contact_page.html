@@ -2,10 +2,11 @@
 {% load i18n wagtailsettings_tags i18n_simple %}
 
 {% block content %}
-<section class="form-page">
-  <h1>{% t "write_to_us" %}</h1>
+<section class="form-page contact">
+  <h1>
+    {{ page.title }}
+  </h1>
 
-<!--  <h1>{% trans "Write to us" %}</h1>-->
   <p class="form-page__intro">{{ page.introduction }}</p>
 
   {% if success %}
@@ -13,46 +14,54 @@
   {% else %}
     <div class="contact-layout">
       <div class="contact-card">
-        <h3>{% trans "Name of the organisation" %}</h3>
-        <p>{{ settings.home.GlobalSiteSettings.organization_name }}</p>
+       <div>
+          <h3>{% t "organisation_name" %}</h3>
+            <p class="contact-card__info">{{ settings.home.GlobalSiteSettings.organization_name }}</p>
+       </div>
 
-        <h3>{% trans "Contact information" %}</h3>
-        <p>{{ settings.home.GlobalSiteSettings.phone }}</p>
-        <p>{{ settings.home.GlobalSiteSettings.email }}</p>
+        <div>
+          <h3>{% t "contact_information" %}</h3>
+        <p class="contact-card__info">{{ settings.home.GlobalSiteSettings.phone }}</p>
+        <p class="contact-card__info-second">{{ settings.home.GlobalSiteSettings.email }}</p>
 
-        <h3>{% trans "Address" %}</h3>
-        <p>{{ settings.home.GlobalSiteSettings.city }}, {{ settings.home.GlobalSiteSettings.address }}<br/>{{ settings.home.GlobalSiteSettings.postal_code }}</p>
+        </div>
+        <div>
+          <h3>{% t "address" %}</h3>
+        <p class="contact-card__info">{{ settings.home.GlobalSiteSettings.city }}, {{ settings.home.GlobalSiteSettings.address }}<br/></p>
+            <p class="contact-card__info-second">
+                {{ settings.home.GlobalSiteSettings.postal_code }}
+            </p>
+        </div>
       </div>
 
-      <form method="post" class="form-card">
+      <form method="post" class="form-card contact">
         {% csrf_token %}
 
         <div class="row">
           <div class="form-group">
-        <label>{% trans "First name" %}</label>
-        {{ form.first_name }}
+          {{ form.first_name }}
       </div>
           <div class="form-group">
-        <label>{% trans "Last Name" %}</label>
+
         {{ form.last_name }}
       </div>
         </div>
         <div class="form-group">
-        <label>{% trans "Email" %}</label>
+
         {{ form.email }}
       </div>
 
         <div class="form-group">
-        <label>{% trans "Organisation" %}</label>
+
         {{ form.organisation }}
       </div>
         <div class="form-group">
-        <label>{% trans "Message" %}</label>
+
         {{ form.message }}
       </div>
 
-        <div class="form-submit">
-          <button type="submit">{% trans "Send" %}</button>
+        <div class="form-submit contact">
+          <button type="submit">{% t "send" %}</button>
         </div>
       </form>
     </div>

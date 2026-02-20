@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n wagtailcore_tags static wagtailsettings_tags i18n_simple %}
+
 
 {% block content %}
 <section class="form-page">
@@ -9,31 +10,31 @@
   {% if success %}
     <div class="form-success">{{ page.success_message }}</div>
   {% else %}
-    <form method="post" class="form-card">
+    <form method="post" class="form-card incident">
       {% csrf_token %}
 
       <div class="form-group">
-        <label>{% trans "What happened" %}</label>
+        <label>{% t "incident_what_happened" %}</label>
         {{ form.what_happened }}
       </div>
 
       <div class="form-group">
-        <label>{% trans "Where happened" %}</label>
+        <label>{% t "incident_where_happened" %}</label>
         {{ form.where_happened }}
       </div>
 
       <div class="form-group">
-        <label>{% trans "Your name" %}</label>
+        <label>{% t "incident_name" %}</label>
         {{ form.name }}
       </div>
 
       <div class="form-group">
-        <label>{% trans "Your phone number" %}</label>
+        <label>{% t "incident_phone" %}</label>
         {{ form.phone }}
       </div>
 
       <div class="form-submit">
-        <button type="submit">{% trans "Send info" %}</button>
+        <button type="submit">{% t "incident_send_info" %}</button>
       </div>
     </form>
   {% endif %}

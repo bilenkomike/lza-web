@@ -60,7 +60,7 @@
             {% endif %}
 
             <a class="urgent-btn" href="{{ incident_report_page.url|default:'/incident-report/' }}">
-              {% t "nav_provide_info" %}
+              {% t "nav_provide_info" %}<br>{% t "nav_provide_info_two" %}<br>{% t "nav_provide_info_three" %}
             </a>
 
             <button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">
@@ -72,10 +72,13 @@
 
       <!-- Mobile menu -->
       <div class="mobile-nav">
-        <a href="/news/">{% t "nav_news" %}</a>
+        <a href="{{ news_page.url|default:'/news/' }}">{% t "nav_news" %}</a>
         <a href="{{ about_page.url|default:'/about/' }}">{% t "nav_about" %}</a>
-        <a href="/advertisement/">{% t "nav_advertisement" %}</a>
-        <a href="/contacts/">{% t "nav_contacts" %}</a>
+        <a href="{{ contact_page.url|default:'/contacts/' }}">{% t "nav_advertisement" %}</a>
+        <a href="{{ contact_page.url|default:'/contacts/' }}">{% t "nav_contacts" %}</a>
+        <a href="{{ incident_report_page.url|default:'/incident-report/' }}">
+              {% t "nav_provide_info" %} {% t "nav_provide_info_two" %} {% t "nav_provide_info_three" %}
+            </a>
       </div>
     </header>
 
