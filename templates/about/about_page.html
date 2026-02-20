@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+<div class="about-page">
+  <!-- Top description -->
+  <div class="about-page-info">
+    {% if page.title %}
+    <h1 class="about-page-title">
+      {{ page.title }}
+    </h1>
+    {% endif %}
+  {% if page.top_description %}
+
+  <div class="about-top-description">{{ page.top_description|richtext }}</div>
+  {% endif %}
+    </div>
+  <!-- Sections -->
+  <div class="about-sections">
+    {% if page.sections %} {% for block in page.sections %}
+    {% include_block block %} {% endfor %} {% endif %}
+  </div>
+
+
+  <!-- Team Section -->
+  {% if page.team_members %}
+  <div class="about-team">
+    {% if page.team_title %}
+    <h2 class="about-team-title">{{ page.team_title }}</h2>
+    {% endif %}
+
+
+    <div class="team-members">
+      {% for member in page.team_members.all %}
+        <div class="team-member">
+          {% if member.image %}
+            <div class="team-member-image">
+              {% image member.image fill-128x128 alt=member.name %}
+            </div>
+          {% endif %}
+          <div class="team-member-info">
+            <div class="team-member-name">{{ member.name }}</div>
+            <div class="team-member-position">{{ member.position }} @{{ member.company_name }}</div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

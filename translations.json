@@ -1,0 +1,32 @@
+{
+ "nav_news": { "en": "News", "lv": "Aktualitātes", "ru": "Новости" },
+  "nav_about": { "en": "About us", "lv": "Par mums", "ru": "О нас" },
+  "nav_advertisement": { "en": "Advertisement", "lv": "Reklāma", "ru": "Реклама" },
+  "nav_contacts": { "en": "Contacts", "lv": "Kontakti", "ru": "Контакты" },
+  "nav_provide_info": {
+    "en": "Provide information urgently",
+    "lv": "Steidzami sniegt informāciju",
+    "ru": "Срочно\n сообщить информацию"
+  },
+  "footer_about_title": { "en": "About us", "lv": "Par mums", "ru": "О нас" },
+  "footer_quick_links": { "en": "Quick links", "lv": "Ātras saites", "ru": "Быстрые ссылки" },
+  "footer_newsletter_title": { "en": "Weekly newsletter", "lv": "Iknedēļas biļetens", "ru": "Еженедельная рассылка" },
+  "footer_newsletter_text": {
+    "en": "Get the latest articles and offers by email!",
+    "lv": "Saņemiet jaunākos rakstus un piedāvājumus pa e-pastu!",
+    "ru": "Получайте новые статьи и предложения по почте!"
+  },
+  "footer_email": { "en": "Email", "lv": "E-pasts", "ru": "Почта" },
+  "footer_phone": { "en": "Phone", "lv": "Tālrunis", "ru": "Телефон" },
+  "footer_subscribe": { "en": "Subscribe", "lv": "Pierakstīties", "ru": "Подписаться" },
+  "write_to_us": {
+    "en": "Write to us",
+    "lv": "Sazināties ar mums",
+    "ru": "Напишите нам"
+  },
+  "send": {
+    "en": "Send",
+    "lv": "Nosūtīt",
+    "ru": "Отправить"
+  }
+}

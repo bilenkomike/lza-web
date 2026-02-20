@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags i18n %}
+
+{% block content %}
+<section class="news-index">
+  <h1 class="news-index__title">{{ page.title }}</h1>
+
+  {% if page.advert %}
+    <div class="news-index__advert">
+      {{ page.advert }}
+    </div>
+  {% endif %}
+
+  <form method="get" class="news-index__search">
+    <input
+      type="text"
+      name="q"
+      placeholder="{% trans 'Search' %}"
+      value="{{ search_query|default_if_none:'' }}"
+    />
+    <button type="submit" aria-label="{% trans 'Search' %}">🔍</button>
+  </form>
+
+  <div class="news-grid">
+    {% for post in news %}
+      <article class="news-card">
+        <a href="{% pageurl post %}" class="news-card__image-wrap">
+          {% if post.image %}
+            {% image post.image fill-400x250 class="news-card__image" %}
+          {% endif %}
+        </a>
+
+        <div class="news-card__content">
+          <a class="news-card__title" href="{% pageurl post %}">
+            {{ post.title }}
+          </a>
+
+          <div class="news-card__meta">
+            {% if post.author %}
+              <div class="news-card__author">
+                {% if post.author.photo %}
+                  {% image post.author.photo fill-24x24 class="news-card__author-avatar" %}
+                {% endif %}
+                <span class="news-card__author-name">{{ post.author.name }}</span>
+              </div>
+            {% endif %}
+
+            {% if post.publication_date %}
+              <time class="news-card__date">
+                {{ post.publication_date|date:"F d, Y"|capfirst }}
+              </time>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+    {% empty %}
+      <p>{% translate "No News yet." %}</p>
+    {% endfor %}
+
+  </div>
+
+  {% if news.paginator.num_pages > 1 %}
+    <nav class="pagination">
+
+
+
+      {% if news.paginator.num_pages > 1 %}
+  <nav class="pagination">
+    {% if news.has_previous %}
+      <a class="pagination__prev"
+         href="?page={{ news.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
+        ← {% trans "Previous" %}
+      </a>
+    {% endif %}
+
+    {% if news.has_next %}
+      <a class="pagination__next"
+         href="?page={{ news.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
+        {% trans "Next" %} →
+      </a>
+    {% endif %}
+  </nav>
+{% endif %}
+
+    </nav>
+  {% endif %}
+</section>
+{% endblock content %}

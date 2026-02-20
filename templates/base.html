@@ -1,0 +1,185 @@
+{% load i18n wagtailcore_tags static wagtailsettings_tags i18n_simple %}
+{% get_settings %}
+
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE|default:'en' }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Page title -->
+    <title>
+      {% block title %}{{ page.title|default:"My Wagtail Site" }}{% endblock %}
+    </title>
+
+    <!-- Global CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <!-- Extra head content per page -->
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <!-- Logo -->
+          <a href="{{ home_page.url|default:'/' }}" class="logo">
+            <div class="main-name">LŽA</div>
+            <div class="secondary-name">
+              <div>Latvijas</div>
+              <div>Žurnālistu</div>
+              <div>Apvienība</div>
+            </div>
+          </a>
+
+          <!-- Desktop navigation -->
+          <nav class="nav">
+            <a class="header-link" href="{{ news_page.url|default:'/news/' }}">{% t "nav_news" %}</a>
+            <a class="header-link" href="{{ about_page.url|default:'/about/' }}">{% t "nav_about" %}</a>
+            <a class="header-link" href="{{ contact_page.url|default:'/contacts/' }}">{% t "nav_advertisement" %}</a>
+            <a class="header-link" href="{{ contact_page.url|default:'/contacts/' }}">{% t "nav_contacts" %}</a>
+          </nav>
+
+          <!-- Right side actions -->
+          <div class="header-actions">
+            {% if page %}
+              <div class="language-switcher">
+                {% for translation in page.get_translations.live %}
+                  <a href="{{ translation.url }}">
+                    {{ translation.locale.language_code|upper }}
+                  </a>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <a class="urgent-btn" href="{{ incident_report_page.url|default:'/incident-report/' }}">
+              {% t "nav_provide_info" %}
+            </a>
+
+            <button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">
+              ☰
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="mobile-nav">
+        <a href="/news/">{% t "nav_news" %}</a>
+        <a href="{{ about_page.url|default:'/about/' }}">{% t "nav_about" %}</a>
+        <a href="/advertisement/">{% t "nav_advertisement" %}</a>
+        <a href="/contacts/">{% t "nav_contacts" %}</a>
+      </div>
+    </header>
+
+    <!-- Main page content -->
+    <main class="site-main container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-wrapper">
+          <div class="footer-info">
+            <div class="footer-title">{% t "footer_about_title" %}</div>
+            <div class="footer-text">{{ settings.home.GlobalSiteSettings.about }}</div>
+
+            <div class="footer-contact-info">
+              <div>
+                <b class="footer-contact-info-title">{% t "footer_email" %}:</b>
+                {{ settings.home.GlobalSiteSettings.email }}
+              </div>
+              <div>
+                <b class="footer-contact-info-title">{% t "footer_phone" %}:</b>
+                {{ settings.home.GlobalSiteSettings.phone }}
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-links-title">
+              {% t "footer_quick_links" %}
+            </div>
+            <div class="footer-links-list">
+              <a class="footer-links-link" href="{{ news_page.url|default:'/news/' }}">
+                {% t "nav_news" %}
+              </a>
+              <a class="footer-links-link" href="{{ about_page.url|default:'/about/' }}">
+                {% t "nav_about" %}
+              </a>
+              <a class="footer-links-link" href="{{ contact_page.url|default:'/contacts/' }}">
+                {% t "nav_advertisement" %}
+              </a>
+              <a class="footer-links-link" href="{{ contact_page.url|default:'/contacts/' }}">
+                {% t "nav_contacts" %}
+              </a>
+            </div>
+          </div>
+
+          <form id="newsletter-form" method="post" action="{% url 'newsletter_subscribe' %}" class="footer-form">
+            {% csrf_token %}
+            <div class="footer-form-title">
+              {% t "footer_newsletter_title" %}
+            </div>
+            <div class="footer-form-text">
+              {% t "footer_newsletter_text" %}
+            </div>
+
+            <div class="subscribe-form-input">
+              <input
+                class="form-input"
+                type="email"
+                name="email"
+                placeholder="{% t 'footer_email' %}"
+                required
+              />
+            </div>
+
+            <div id="newsletter-message"></div>
+
+            <button class="button" type="submit">
+              {% t "footer_subscribe" %}
+            </button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Global JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- Newsletter submit -->
+    <script>
+      document.getElementById("newsletter-form")?.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const form = this;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": form.querySelector('[name=csrfmiddlewaretoken]').value,
+          },
+          body: formData
+        })
+        .then(r => r.json())
+        .then(data => {
+          const messageBox = document.getElementById("newsletter-message");
+          messageBox.innerText = data.success ? data.message : "Error";
+          if (data.success) form.reset();
+        });
+      });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

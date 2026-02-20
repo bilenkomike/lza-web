@@ -1,0 +1,79 @@
+
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+<section class="home-hero">
+  {% if last_post and last_post.image %}
+    <div class="hero-image">
+      {% image last_post.image fill-1200x500 %}
+      <div class="hero-card">
+        <div class="hero-label">LAST POST</div>
+        <div class="hero-meta">
+          <span class="hero-meta__info">{% if last_post.author and last_post.author.photo %}
+            {% image last_post.author.photo fill-36x36 class="avatar" %}
+          {% endif %}
+          <span class="hero-meta__name">{{ last_post.author }}</span></span>
+          <span class="hero-meta__date">{{ last_post.publication_date|date:"F j, Y" }}</span>
+        </div>
+      </div>
+      <a class="hero-link" href="{% pageurl last_post %}"></a>
+    </div>
+  {% endif %}
+</section>
+
+<section class="home-latest">
+  <h2>{{ page.page_title }}</h2>
+
+  <div class="post-grid">
+    {% for post in latest_posts %}
+      <article class="news-card">
+<!--        <a href="{% pageurl post %}" class="news-card__image-wrap">-->
+          {% if post.image %}
+            {% image post.image fill-400x250 class="news-card__image" %}
+          {% endif %}
+<!--        </a>-->
+
+        <div class="news-card__content">
+          <a class="news-card__title" href="{% pageurl post %}">
+            {{ post.title }}
+          </a>
+
+          <div class="news-card__meta">
+            {% if post.author %}
+              <div class="news-card__author">
+                {% if post.author.photo %}
+                  {% image post.author.photo fill-24x24 class="news-card__author-avatar" %}
+                {% endif %}
+                <span class="news-card__author-name">{{ post.author.name }}</span>
+              </div>
+            {% endif %}
+
+            {% if post.publication_date %}
+              <time class="news-card__date">
+                {{ post.publication_date|date:"F d, Y"|capfirst }}
+              </time>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="home-actions">
+    <a class="btn-outline" href="{% slugurl 'news' %}">
+      Skatīt visus jaunumus
+    </a>
+  </div>
+</section>
+
+{% if page.advert %}
+  <section class="home-advert">
+    <a href="{{ page.advert.url }}" target="_blank" rel="noopener">
+      {% image page.advert.image fill-1200x180 %}
+    </a>
+  </section>
+{% endif %}
+
+{% endblock %}

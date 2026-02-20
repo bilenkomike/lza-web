@@ -1,0 +1,22 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div
+  class="about-section"
+>
+  {% if self.image and self.image_placement == "left" %}
+  <div class="about-section-image-wrapper">
+  {% image self.image.image original alt=self.title class_name="about-section-image" %}
+    </div>
+{% endif %}
+
+  <div class="about-section-info">
+    <h2 class="about-section-title">{{ self.title }}</h2>
+    <div class="about-section-subtitle">{{ self.subtext }}</div>
+    <div class="about-section-description">{{ self.text|richtext }}</div>
+  </div>
+  {% if self.image and self.image_placement == "right" %}
+  <div class="about-section-image-wrapper">
+  {% image self.image.image original alt=self.title class_name="about-section-image" %}
+    </div>
+{% endif %}
+</div>
