@@ -242,6 +242,7 @@ font-weight: 600;
 font-size: 40px;
 line-height: 40px;
 color: #181A2A;
+text-align: center;
 }
 
 .about-top-description {
@@ -268,6 +269,10 @@ color: #3B3C4A;
         gap: 16px;
         margin-bottom: 0;
     }
+}
+
+.page-title {
+    text-align: center;
 }
 
 
@@ -679,11 +684,18 @@ align-items: center;
 justify-content: center;
   border-radius: 4px;
   border: none;
-  width: 24px;
-  height: 24px;
-  padding: 0 16px;
-  color: white;
+  width: 32px;
+  height: 32px;
+
   cursor: pointer;
+  background: transparent;
+}
+
+.news-index__search button > svg {
+    width: 20px;
+    height: 20px;
+    stroke: black;
+
 }
 
 .news-grid {
@@ -1006,6 +1018,8 @@ gap: 16px;
 .form-card.contact {
     max-width: 768px;
     width: 100%;
+    gap: 16px;
+    padding: 0 32px;
 
 }
 
@@ -1058,11 +1072,10 @@ color: #181A2A80;
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
 }
 
 .form-card .form-group {
-  margin-bottom: 16px;
 }
 
 .form-group > label {
@@ -1083,7 +1096,7 @@ color: #181A2A;
  .form-submit a {
 max-width: 590px;
 width: 100%;
-  background: #ffffff;
+  background: #E5E5EA;
   border-radius: 6px;
   padding: 12px 12px;
 font-weight: 500;
@@ -1104,6 +1117,12 @@ max-width: unset;
 .form-submit button:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+.form-card.contact > .row > .form-group > input,
+ .form-card.contact > .form-group > input
+ {
+    height: 63px;
 }
 
 /* ===== Success ===== */
@@ -1348,6 +1367,10 @@ color: #97989F;
   display: flex;
   justify-content: center;
   margin: 24px 0 48px;
+}
+
+.home-actions > a {
+    background: #E5E5EA;
 }
 
 .btn-outline {
