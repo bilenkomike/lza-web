@@ -147,7 +147,7 @@ figure {
 }
 
 .urgent-btn {
-  background: #6C0000;
+  background: #F84200;
   color: #fff;
   width: 148px;
   height: 145px;
@@ -971,14 +971,13 @@ max-height: 400px;
 
 .form-page.contact {
     max-width: unset;
+    padding: 64px 16px 0;
 }
 
 @media (max-width: 768px) {
     .form-page {
         padding: 16px 4px;
     }
-
-
 }
 
 
@@ -1392,4 +1391,166 @@ color: #97989F;
 .home-advert > a > img {
      max-width: 1200px;
        width: 100%;
+}
+
+
+/* advertising */
+.advertising {
+    margin: 60px 15px 0;
+    max-width: 1140px;
+    width: 100%;
+}
+
+
+.advertising__container {
+  background: #e9e9ec;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.advertising__header {
+  width: 100%;
+  padding: 22px 28px;
+
+  background: transparent;
+  border: none;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.advertising__arrow {
+  transition: transform 0.25s ease;
+}
+
+.advertising__arrow.open {
+  transform: rotate(180deg);
+}
+
+.advertising__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+  padding: 0 28px;
+}
+
+.advertising__content.open {
+  padding: 28px;
+  max-height: 1000px;
+}
+
+.advertising__description {
+  margin-bottom: 28px;
+  font-size: 18px;
+}
+
+.advertising__table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin-bottom: 32px;
+}
+
+.advertising__table-header,
+.advertising__table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  font-size: 18px;
+}
+
+.advertising__table-header {
+  font-weight: 600;
+}
+
+.advertising__contacts {
+  font-size: 18px;
+}
+
+.advertising__contacts-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.advertising__contacts a {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+
+  .advertising {
+        margin: 40px 0 0;
+        max-width: unset;
+        width: 100%;
+  }
+
+  .advertising__header {
+    padding: 18px 20px;
+    font-size: 20px;
+  }
+
+  .advertising__content.open {
+    padding: 20px;
+  }
+
+  .advertising__description {
+    font-size: 16px;
+  }
+
+  /* Hide table header on mobile */
+  .advertising__table-header {
+    display: none;
+  }
+
+  /* Convert rows to stacked cards */
+  .advertising__table-row {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    background: rgba(255,255,255,0.35);
+    padding: 12px 14px;
+    border-radius: 8px;
+
+    font-size: 16px;
+  }
+
+  .advertising__table-row div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .advertising__table-row div:nth-child(1)::before {
+    content: "Name";
+    font-weight: 600;
+  }
+
+  .advertising__table-row div:nth-child(2)::before {
+    content: "Month";
+    font-weight: 600;
+  }
+
+  .advertising__table-row div:nth-child(3)::before {
+    content: "Week";
+    font-weight: 600;
+  }
+
+  .advertising__table-row div:nth-child(4)::before {
+    content: "Day";
+    font-weight: 600;
+  }
+
+  .advertising__contacts {
+    font-size: 16px;
+  }
+
 }

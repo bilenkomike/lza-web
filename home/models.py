@@ -98,7 +98,8 @@ class Home(Page):
             .filter(locale=self.locale)
             .order_by("-publication_date")
         )
+        qs_hot = qs.filter(hot=True)
         context["last_post"] = qs.first()
-        context["latest_posts"] = qs[0:7]
+        context["latest_posts"] = qs_hot[0:7]
 
         return context

@@ -119,5 +119,46 @@
     "en": "Previous",
     "lv": "Iepriekšējais",
     "ru": "Предыдущее"
-  }
+  },
+  "advertising_title": {
+  "en": "Advertisement",
+  "lv": "Par reklāmu",
+  "ru": "О рекламе"
+},
+
+"advertising_intro": {
+  "en": "The Latvian Journalists Association portal offers advertising opportunities in several banner positions. Prices depend on the banner size and placement duration.",
+  "lv": "Latvijas Žurnālistu asociācijas portālā piedāvājam vairākas reklāmas baneru pozīcijas. Cenas ir atkarīgas no reklāmas izmēra un izvietošanas ilguma.",
+  "ru": "На портале Ассоциации журналистов Латвии доступны различные рекламные баннерные позиции. Цена зависит от размера баннера и срока размещения."
+},
+
+"advertising_name": {
+  "en": "Name",
+  "lv": "Nosaukums",
+  "ru": "Название"
+},
+
+"advertising_price_month": {
+  "en": "Price per month",
+  "lv": "Cena mēnesī",
+  "ru": "Цена в месяц"
+},
+
+"advertising_price_week": {
+  "en": "Price per week",
+  "lv": "Cena nedēļā",
+  "ru": "Цена в неделю"
+},
+
+"advertising_price_day": {
+  "en": "Price per day",
+  "lv": "Cena dienā",
+  "ru": "Цена в день"
+},
+
+"advertising_contacts": {
+  "en": "Advertising department contacts",
+  "lv": "Reklāmas daļas kontakti",
+  "ru": "Контакты рекламного отдела"
+}
 }

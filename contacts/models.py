@@ -1,10 +1,14 @@
 from wagtail.snippets.models import register_snippet
 from django.db import models
 from wagtail.models import Page, TranslatableMixin
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from django.shortcuts import render
 from django import forms
 from .utils import t
+from wagtail.models import Page, TranslatableMixin, Orderable
+from modelcluster.fields import ParentalKey
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 
@@ -26,6 +30,15 @@ class ContactSubmission(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+@register_snippet
+class IncidentReportEmails(models.Model):
+    email = models.EmailField(
+        null=False,
+        blank=False
+    )
+    def __str__(self):
+        return self.email
 
 
 class IncidentReportForm(forms.Form):
@@ -109,33 +122,141 @@ class IncidentReportPage(Page, TranslatableMixin):
     parent_page_types = ["home.Home"]
     subpage_types = []
 
+    # def serve(self, request):
+    #
+    #     if request.method == "POST":
+    #         form = IncidentReportForm(request.POST)
+    #         if form.is_valid():
+    #             IncidentReportSubmission.objects.create(**form.cleaned_data)
+    #             return render(request, self.template, {
+    #                 "page": self,
+    #                 "form": IncidentReportForm(),
+    #                 "success": True,
+    #             })
+    #     else:
+    #         form = IncidentReportForm()
+    #
+    #     return render(request, self.template, {
+    #         "page": self,
+    #         "form": form,
+    #     })
     def serve(self, request):
 
         if request.method == "POST":
             form = IncidentReportForm(request.POST)
+
             if form.is_valid():
-                IncidentReportSubmission.objects.create(**form.cleaned_data)
-                return render(request, self.template, {
-                    "page": self,
-                    "form": IncidentReportForm(),
-                    "success": True,
-                })
+
+                # Save submission in DB
+                submission = IncidentReportSubmission.objects.create(
+                    **form.cleaned_data
+                )
+
+                # Get emails from snippet table
+                emails = list(
+                    IncidentReportEmails.objects.values_list("email", flat=True)
+                )
+
+                # Prepare email content
+                subject = "New Incident Report"
+
+                message = f"""
+    New incident report submitted.
+
+    What happened:
+    {submission.what_happened}
+
+    Where:
+    {submission.where_happened}
+
+    Name:
+    {submission.name}
+
+    Phone:
+    {submission.phone}
+
+    Submitted at:
+    {submission.created_at}
+    """
+                print(emails)
+                if emails:
+                    send_mail(
+                        subject,
+                        message,
+                        settings.DEFAULT_FROM_EMAIL,
+                        emails,
+                        fail_silently=False,
+                    )
+
+                return render(
+                    request,
+                    self.template,
+                    {
+                        "page": self,
+                        "form": IncidentReportForm(),
+                        "success": True,
+                    },
+                )
+
         else:
             form = IncidentReportForm()
 
-        return render(request, self.template, {
-            "page": self,
-            "form": form,
-        })
+        return render(
+            request,
+            self.template,
+            {
+                "page": self,
+                "form": form,
+            },
+        )
 
+
+class AdvertisingBanner(Orderable):
+    page = ParentalKey(
+        "ContactPage",
+        related_name="advertising_banners",
+        on_delete=models.CASCADE,
+    )
+
+    name = models.CharField(max_length=255)
+    price_month = models.CharField(max_length=100, blank=True)
+    price_week = models.CharField(max_length=100, blank=True)
+    price_day = models.CharField(max_length=100, blank=True)
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("price_month"),
+        FieldPanel("price_week"),
+        FieldPanel("price_day"),
+    ]
+
+    def __str__(self):
+        return self.name
 
 class ContactPage(Page, TranslatableMixin):
     introduction = models.TextField(blank=True)
     success_message = models.TextField(blank=True, default="Thank you. Message sent.")
+    advertising_title = models.CharField(
+        max_length=255,
+        blank=True,
+        default="Par reklāmu",
+    )
+
+    advertising_contact_email = models.EmailField(blank=True)
+    advertising_contact_phone = models.CharField(max_length=100, blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel("introduction"),
         FieldPanel("success_message"),
+
+        FieldPanel("advertising_title"),
+        InlinePanel(
+            "advertising_banners",
+            label="Advertising banners",
+        ),
+
+        FieldPanel("advertising_contact_email"),
+        FieldPanel("advertising_contact_phone"),
     ]
 
     parent_page_types = ["home.Home"]

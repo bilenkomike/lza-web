@@ -67,4 +67,73 @@
     </div>
   {% endif %}
 </section>
+<section class="advertising">
+
+  <div class="advertising__container">
+
+    <button class="advertising__header" onclick="toggleAdvertising()">
+      <span>{% t "advertising_title" %}</span>
+
+      <svg class="advertising__arrow" width="20" height="20" viewBox="0 0 24 24">
+        <path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="2" fill="none"/>
+      </svg>
+    </button>
+
+    <div class="advertising__content" id="advertisingContent">
+
+      <p class="advertising__description">
+        {% t "advertising_intro" %}
+      </p>
+
+      <div class="advertising__table">
+
+        <div class="advertising__table-header">
+          <div>{% t "advertising_name" %}</div>
+          <div>{% t "advertising_price_month" %}</div>
+          <div>{% t "advertising_price_week" %}</div>
+          <div>{% t "advertising_price_day" %}</div>
+        </div>
+
+        {% for banner in page.advertising_banners.all %}
+        <div class="advertising__table-row">
+          <div>{{ forloop.counter }}. {{ banner.name }}</div>
+          <div>{{ banner.price_month }}</div>
+          <div>{{ banner.price_week }}</div>
+          <div>{{ banner.price_day }}</div>
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <div class="advertising__contacts">
+
+        <p class="advertising__contacts-title">
+          {% t "advertising_contacts" %}
+        </p>
+
+        <p>
+          {% t "footer_email" %}:
+          <a href="mailto:{{ page.advertising_contact_email }}">
+            {{ page.advertising_contact_email }}
+          </a>
+        </p>
+
+        <p>
+          {% t "footer_phone" %}: {{ page.advertising_contact_phone }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<script>function toggleAdvertising() {
+  const content = document.getElementById("advertisingContent");
+  const arrow = document.querySelector(".advertising__arrow");
+
+  content.classList.toggle("open");
+  arrow.classList.toggle("open");
+}</script>
 {% endblock %}

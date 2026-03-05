@@ -61,6 +61,7 @@ class NewsCategory(TranslatableMixin, models.Model):
 
 class NewsPage(Page):
     publication_date = models.DateField(null=True, blank=True)
+    hot = models.BooleanField(default=False)
     author = models.ForeignKey(
         Author,  # change app name if needed
         null=True,
@@ -78,6 +79,7 @@ class NewsPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("publication_date"),
+        FieldPanel("hot"),
         FieldPanel("author"),
         FieldPanel("image"),
         FieldPanel("body"),
